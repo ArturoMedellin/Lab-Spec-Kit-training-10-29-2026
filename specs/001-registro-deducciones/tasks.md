@@ -12,16 +12,16 @@ description: "Tareas para implementar el registro de deducciones"
 
 **Propósito**: Preparar la solución Power Platform compartida.
 
-- [ ] T001 Confirmar el entorno Power Platform aprobado y las políticas DLP aplicables en `Solución Power Platform AIMA/Entorno`
-- [ ] T002 Crear o seleccionar la solución única con publisher prefix `AIMA` en `Solución Power Platform AIMA/Solución`
-- [ ] T003 Crear la aplicación model-driven inicial con etiquetas en español dentro de `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones`
+- [x] T001 Confirmado por Arturo: ambiente Power Platform `d944c75b-d3c5-e047-8426-58ffb8f7d70f` aprobado y políticas DLP revisadas en `Solución Power Platform AIMA/Entorno`
+- [x] T002 Creada la solución no administrada `Registro de deducciones` (`AIMA_RegistroDeducciones`) con publisher `AIMA` y prefijo efectivo `aima` aceptado por Arturo en `Solución Power Platform AIMA/Solución`
+- [x] T003 Creada y publicada en español la aplicación model-driven `Registro de deducciones` (ID `2191dba8-c8d3-f111-a05c-000d3a123dae`, nombre único `registro_de_deducciones_1af6d2f2`) dentro de `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones`
 
 ## Fase 2: Fundamentos
 
 **Propósito**: Crear la tabla central y los permisos base requeridos por todas las historias.
 
-- [ ] T004 Crear la tabla principal Deducción en `Solución Power Platform AIMA/Tablas/Deducción`
-- [ ] T005 Configurar Asociado Cash App, Aprobador UA y Revisor UD con lectura de todos los registros y sin privilegios iniciales de crear o modificar en `Solución Power Platform AIMA/Roles de seguridad/Deducción`
+- [x] T004 Crear la tabla principal Deducción en `Solución Power Platform AIMA/Tablas/Deducción` (nombre lógico `aima_table1`)
+- [x] T005 Configurar Asociado Cash App, Aprobador UA y Revisor UD con lectura organizacional y sin privilegios de crear o modificar sobre Deducción en `Solución Power Platform AIMA/Roles de seguridad/Deducción` (verificado en Dataverse: Read = Organization; Create/Write = None; roles personalizados basados en App Opener)
 
 **Punto de control**: solución AIMA, aplicación inicial, tabla Deducción y lectura común preparados.
 
@@ -31,9 +31,9 @@ description: "Tareas para implementar el registro de deducciones"
 
 **Prueba independiente**: Como Aprobador UA, completar y guardar una deducción válida en menos de un minuto. Comprobar referencia por origen, clasificación F-30/F-28, centro de costo condicional, advertencia de posible duplicado y valores CP, Nueva y fecha de registro. Confirmar que los otros roles no pueden crear.
 
-- [ ] T006 [US1] Crear las columnas de registro en `Solución Power Platform AIMA/Tablas/Deducción`: Cliente «Texto libre; al determinar la clasificación, ignorar mayúsculas y espacios al inicio o al final»; Origen «Uno de Pago, Ajuste AR o Netting»; Referencia «Número de cheque para Pago, número de ajuste para Ajuste AR o número de transacción Netting para Netting»; Monto «USD, hasta dos decimales; se permiten cero y valores negativos»; Centro de costo UD «Requerido cuando el cliente no es DOT Foods, Safeway ni Gordon Food Service; para esos tres clientes se determina F-30».
-- [ ] T007 [US1] Configurar el formulario de alta con Cliente, Origen, Referencia, Monto USD y Centro de costo UD en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Formularios/Alta`
-- [ ] T008 [US1] Exigir la referencia correspondiente al origen y bloquear el guardado cuando falte en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Validaciones de alta`
+- [x] T006 [US1] Crear las columnas de registro en `Solución Power Platform AIMA/Tablas/Deducción`: Cliente (`aima_Cliente`, texto requerido); Origen (`aima_Origen`, opción local de selección única: Pago, Ajuste AR y Netting, requerido); Referencia (`aima_Referencia`, texto requerido); Monto (`aima_Monto`, moneda con precisión fija de 2 decimales y requerido; Arturo confirmó que la moneda base del entorno es USD); Centro de costo UD (`aima_CentrodecostoUD`, texto opcional para aplicar la obligatoriedad condicional de la regla).
+- [x] T007 [US1] Configurar y publicar el formulario principal como «Alta de deducción» en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Formularios/Alta`, con Cliente, Origen, Referencia y Monto requeridos, y Centro de costo UD opcional
+- [x] T008 [US1] Exigir la Referencia (`aima_Referencia`) en la columna Dataverse y el formulario publicado «Alta de deducción»; el requisito Business required bloquea guardar sin referencia en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Validaciones de alta`
 - [ ] T009 [US1] Bloquear el guardado sin Cliente, Origen o Monto y validar «USD, hasta dos decimales; se permiten cero y valores negativos» en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Validaciones de alta`
 - [ ] T010 [US1] Determinar F-30 para DOT Foods, Safeway y Gordon Food Service, y F-28 para cualquier otro cliente; ignorar mayúsculas/espacios iniciales o finales y exigir centro de costo UD solo para otros clientes en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Reglas de clasificación`
 - [ ] T011 [US1] Asignar al guardar Tipo de documento CP, Estado Nueva y Fecha de registro en `Solución Power Platform AIMA/Tablas/Deducción/Reglas de creación`
