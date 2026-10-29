@@ -32,7 +32,7 @@ La constitución del proyecto determina la plataforma: una aplicación model-dri
 
 ## Revisión de la constitución
 
-*Puerta previa a investigación y diseño: los diez principios cumplen en esta propuesta. La aprobación explícita del plan y diseño por una persona sigue pendiente.*
+*Puerta previa a investigación y diseño: los diez principios cumplen. Aprobación humana explícita del plan y diseño registrada el 2026-10-29.*
 
 | Principio constitucional | Estado | Justificación |
 |---|---|---|
@@ -84,4 +84,4 @@ Tras producir los artefactos de Fase 1, se volvieron a comprobar los principios 
 
 ## Puerta de aprobación
 
-**Estado: pendiente de aprobación humana.** La revisión del diseño debe confirmar el modelo conceptual, los permisos y las cuestiones operativas pendientes antes de `/speckit-tasks` o de cualquier implementación. No se crean tareas en esta fase.
+**Estado: aprobado por una persona el 2026-10-29.** Se pueden descomponer tareas. La aprobación humana del ensayo sigue siendo requisito antes de liberar; el agente no se autoaprueba.
