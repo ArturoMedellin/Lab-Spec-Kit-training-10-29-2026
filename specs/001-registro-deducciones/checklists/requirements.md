@@ -32,8 +32,10 @@ planificación.
 
 ## Notas
 
-- El usuario resolvió las aclaraciones sobre moneda (USD), referencia de
-  Netting (número de transacción) y visibilidad (todos los roles ven todos los
-  registros), y definió los permisos de registro y modificación por rol.
+- El usuario confirmó que el monto acepta hasta dos decimales en USD, que los
+  registros coincidentes generan una advertencia sin impedir guardar, y que
+  todos los orígenes requieren referencia.
+- El usuario definió la referencia de Netting, la visibilidad de todos los
+  registros para los tres roles y sus permisos de registro y modificación.
 - «[x]» refleja únicamente una revisión de calidad de requisitos, no trabajo
   de implementación completado.
