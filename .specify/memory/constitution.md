@@ -1,50 +1,102 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Constitución de la aplicación de Deducciones
 
-## Core Principles
+## Principios Fundamentales
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Plataforma Power Platform
+La solución MUST ser una aplicación model-driven sobre Dataverse y MUST usar
+únicamente servicios de Power Platform. La autenticación corporativa con
+Microsoft Entra ID descrita en el principio III es la única dependencia externa
+permitida en esta versión.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Solución única y prefijo
+Todos los componentes de la aplicación MUST vivir en una sola solución de
+Power Platform y MUST llevar el prefijo del publicador `AIMA`. Cada spec y plan
+que agregue componentes MUST identificar cómo se cumple este requisito.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Identidad, roles y DLP
+El acceso MUST autenticarse con Microsoft Entra ID usando una cuenta de Gruma.
+Dataverse MUST autorizar el acceso mediante roles de seguridad; la aplicación
+MUST respetar las políticas DLP del ambiente. Ningún diseño puede eludir los
+controles de identidad, permisos o DLP configurados por la organización.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Roles base
+La aplicación MUST definir los roles Asociado Cash App, Revisor UD y
+Aprobador UA. La spec de cada cambio MUST establecer los permisos que necesita
+cada rol; el plan y las pruebas MUST comprobar que el acceso permitido y
+denegado coincide con esa definición.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Modelo de datos simple
+El modelo MUST tener una tabla principal llamada Deducción y puede incluir
+catálogos editables. Una entidad de negocio adicional requiere justificación
+y aprobación explícita en la spec antes de diseñarse.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### VI. Idioma
+Los textos visibles de la aplicación y la documentación del proyecto MUST estar
+en español. Una excepción requiere justificación y aprobación en la spec
+correspondiente.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### VII. Límite con sistemas externos
+En esta versión, la aplicación MUST registrar y dar seguimiento a las
+deducciones. MUST NOT contabilizar ni conectarse con SAP, TNET o TradePro.
+Cualquier cambio de este límite requiere una enmienda aprobada a esta
+constitución y una spec nueva o actualizada.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### VIII. Alcance de la versión
+Las notificaciones, los flujos de Power Automate y los reportes están fuera del
+alcance de esta versión. Ninguna spec o plan puede incluirlos sin una enmienda
+aprobada a esta constitución.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### IX. Cero secretos
+El repositorio MUST NOT contener contraseñas, llaves, tokens ni credenciales.
+Los cambios MUST evitar incorporar secretos en código, configuración,
+documentación, datos de prueba o artefactos generados.
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+### X. Desarrollo guiado por la spec y requisitos comprobables
+Todo cambio MUST originarse en una spec aprobada; nadie puede modificar la
+aplicación manualmente fuera del proceso aprobado por esa spec. Una persona
+MUST aprobar la spec, el plan, el diseño y el ensayo antes de avanzar a la
+siguiente etapa. El agente MUST NOT aprobar su propio trabajo.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Cada requisito MUST poder verificarse mediante un criterio observable con la
+forma «CUANDO <contexto>, EL SISTEMA DEBE <resultado observable>». El ensayo
+MUST comprobar esos criterios y registrar sus resultados.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+## Alcance y restricciones
+
+La aplicación administra el registro y seguimiento de deducciones dentro de
+Power Platform. Los roles, permisos, datos y comportamiento que no se
+especifican aquí se definen en la spec correspondiente, siempre dentro de los
+límites de esta constitución.
+
+## Flujo de desarrollo y calidad
+
+Cada plan MUST incluir una tabla titulada «Revisión de la constitución» antes
+de diseñar la solución. La tabla MUST enumerar los diez principios e indicar
+«Cumple» para cada uno, con una justificación breve que vincule el principio
+con la decisión de diseño. Si un principio no se cumple, el trabajo MUST
+detenerse hasta que se ajuste la propuesta o se apruebe una enmienda.
+
+Una persona MUST aprobar explícitamente la spec, el plan, el diseño y el ensayo.
+Las revisiones MUST verificar el cumplimiento de los principios, los permisos
+por rol, las políticas DLP aplicables, los criterios de aceptación y la ausencia
+de secretos en los cambios.
+
+## Gobierno
+
+Esta constitución prevalece sobre prácticas o planes que entren en conflicto
+con ella. Las enmiendas MUST ser propuestas mediante pull request y MUST ser
+aprobadas por Arturo Medellín antes de integrarse. El pull request MUST explicar
+la motivación, el impacto y la migración necesaria, si aplica.
+
+El versionado sigue SemVer:
+
+- **MAJOR**: se elimina o redefine un principio de forma incompatible.
+- **MINOR**: se agrega un principio o requisito de gobierno.
+- **PATCH**: se aclara o corrige la redacción sin cambiar su significado.
+
+Cada pull request y cada revisión de cumplimiento MUST comprobar que la spec,
+el plan, el diseño, el ensayo y los cambios de la aplicación respetan esta
+constitución. Si hay incumplimientos, deben resolverse antes de aprobar el
+cambio.
+
+**Versión**: 1.0.0 | **Ratificada**: 2026-10-29 | **Última enmienda**: 2026-10-29
