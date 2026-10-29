@@ -8,6 +8,14 @@
 
 **Input**: Registro de deducciones por Aprobador UA, consulta por los tres roles base y modificación por Revisor UD, según las historias y reglas de negocio indicadas por el usuario.
 
+## Clarificaciones
+
+### Sesión 2026-10-29
+
+- Q: ¿Qué precisión debe aceptar el monto en USD? → A: Hasta dos decimales.
+- Q: ¿Qué debe hacer el sistema si se registra otra deducción con el mismo cliente, origen y número de referencia? → A: Permitirlo y mostrar una advertencia.
+- Q: ¿Debe ser obligatorio capturar el número de cheque, ajuste o transacción Netting antes de guardar? → A: Obligatoria para los tres orígenes.
+
 ## Escenarios de usuario y pruebas
 
 ### Historia de usuario 1 - Registrar una deducción (Prioridad: P1)
@@ -35,7 +43,10 @@ esperada y el estado y fecha asignados al registrarla.
 3. **Dado** un formulario de registro, **cuando** falta el cliente, el origen
    o el monto, **entonces** el sistema impide guardar la deducción e identifica
    los datos requeridos que faltan.
-4. **Dado** un Aprobador UA que inicia el registro, **cuando** completa y
+4. **Dado** un formulario de registro, **cuando** falta la referencia
+   correspondiente al origen, **entonces** el sistema impide guardar la
+   deducción.
+5. **Dado** un Aprobador UA que inicia el registro, **cuando** completa y
    guarda una deducción válida, **entonces** puede finalizar el registro en
    menos de un minuto.
 
@@ -46,9 +57,14 @@ esperada y el estado y fecha asignados al registrarla.
   indicados; cualquier otro nombre se clasifica como otro cliente.
 - Los montos numéricos cero y negativos son válidos si se cumplen los demás
   requisitos de registro.
+- El monto en USD puede incluir hasta dos dígitos decimales.
 - Si el cliente es distinto de los tres indicados y no se proporciona el
   centro de costo de UD, el sistema impide guardar.
 - El origen Netting utiliza el número de transacción Netting como referencia.
+- Si no se captura la referencia correspondiente al origen, el sistema impide
+  guardar la deducción.
+- Si ya existe una deducción con el mismo cliente, origen y número de referencia,
+  el sistema muestra una advertencia y permite guardar la nueva deducción.
 
 ### Historia de usuario 2 - Consultar deducciones (Prioridad: P2)
 
@@ -103,9 +119,9 @@ consultarlo en la deducción correspondiente.
 ### Requisitos funcionales
 
 - **FR-001**: CUANDO un Aprobador UA registre una deducción,
-  EL SISTEMA DEBE permitir capturar cliente, origen, número de cheque o ajuste,
-  monto en USD y centro de costo, y aceptar cualquier monto numérico incluido
-  cero o negativo.
+  EL SISTEMA DEBE permitir capturar cliente, origen, referencia
+  correspondiente al origen, monto en USD con hasta dos decimales y centro de
+  costo, y aceptar cualquier valor numérico incluido cero o negativo.
 - **FR-002**: CUANDO un usuario que no tenga el rol Aprobador UA intente
   registrar una deducción, EL SISTEMA DEBE impedir la creación.
 - **FR-003**: CUANDO falte el cliente, el origen o el monto,
@@ -134,12 +150,17 @@ consultarlo en la deducción correspondiente.
 - **FR-013**: CUANDO el origen sea Netting,
   EL SISTEMA DEBE permitir capturar el número de transacción Netting como
   referencia de la operación.
-- **FR-014**: CUANDO el usuario tenga el rol Aprobador UA,
+- **FR-014**: CUANDO falte la referencia correspondiente al origen,
+  EL SISTEMA DEBE impedir guardar la deducción.
+- **FR-015**: CUANDO se registre una deducción con el mismo cliente, origen y
+  número de referencia que otra existente, EL SISTEMA DEBE advertir que hay una
+  coincidencia y permitir guardar la deducción.
+- **FR-016**: CUANDO el usuario tenga el rol Aprobador UA,
   EL SISTEMA DEBE permitirle crear deducciones y consultar todos los registros.
-- **FR-015**: CUANDO el usuario tenga el rol Asociado Cash App,
+- **FR-017**: CUANDO el usuario tenga el rol Asociado Cash App,
   EL SISTEMA DEBE permitirle consultar todos los registros, sin crear ni
   modificar deducciones.
-- **FR-016**: CUANDO el usuario tenga el rol Revisor UD,
+- **FR-018**: CUANDO el usuario tenga el rol Revisor UD,
   EL SISTEMA DEBE permitirle consultar todos los registros y modificar los
   datos de una deducción existente, salvo el estado y el cierre.
 
@@ -181,8 +202,9 @@ consultarlo en la deducción correspondiente.
   otros clientes.
 - Para Pago, la referencia corresponde al número de cheque; para Ajuste AR,
   corresponde al número de ajuste; para Netting, corresponde al número de
-  transacción Netting.
-- Se acepta cualquier monto numérico, incluidos cero y valores negativos.
+  transacción Netting. La referencia es obligatoria para los tres orígenes.
+- Se acepta cualquier valor numérico en USD con hasta dos decimales, incluidos
+  cero y valores negativos.
 - El centro de costo puede capturarse para cualquier cliente; solo es
   obligatorio para clientes distintos de los tres indicados.
 - El Revisor UD captura manualmente el número de documento SAP después de una
