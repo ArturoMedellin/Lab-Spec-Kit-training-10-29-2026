@@ -1,20 +1,22 @@
-# Propuesta de enmienda 1.1.0: Notificaciones de deducciones
+# Enmienda 1.1.0: Notificaciones de deducciones
 
-**Estado**: Propuesta pendiente de aprobación de Arturo Medellín  
-**Constitución vigente**: 1.0.0  
-**Versión propuesta**: 1.1.0
+**Estado**: Aprobada e integrada mediante el pull request #9
+
+**Constitución anterior**: 1.0.0
+
+**Versión ratificada**: 1.1.0
 
 ## Motivación
 
 El seguimiento de una deducción requiere avisar al siguiente rol responsable
 cuando se registra y cuando el Revisor UD agrega el número de documento SAP.
-La constitución 1.0.0 excluye las notificaciones y los flujos de Power
-Automate, por lo que este alcance requiere una enmienda antes de especificarse
+La constitución 1.0.0 excluía las notificaciones y los flujos de Power
+Automate, por lo que este alcance requirió una enmienda antes de especificarse
 o implementarse.
 
-## Cambio propuesto
+## Cambio ratificado
 
-Reemplazar el Principio VIII por el siguiente texto:
+El Principio VIII se sustituyó por el siguiente texto:
 
 > ### VIII. Alcance de la versión
 >
@@ -53,9 +55,8 @@ notificación autorizada arriba.
 
 ## Aprobación y versionado
 
-Esta propuesta no modifica la constitución ratificada ni autoriza trabajo de
-planificación o implementación. Si Arturo Medellín la aprueba y se integra
-mediante pull request, se actualizará el Principio VIII y la versión de la
-constitución a 1.1.0, conforme al cambio MINOR por ampliación acotada del
-alcance. Después podrá crearse la especificación funcional y seguir el proceso
-de aprobación humana definido en el Principio X.
+Arturo Medellín aprobó la enmienda y se integró mediante el pull request #9.
+El Principio VIII y la versión de la constitución se actualizaron a 1.1.0,
+conforme al cambio MINOR por ampliación acotada del alcance. La especificación
+funcional puede avanzar y sigue sujeta al proceso de aprobación humana definido
+en el Principio X.

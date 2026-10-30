@@ -42,9 +42,21 @@ Cualquier cambio de este límite requiere una enmienda aprobada a esta
 constitución y una spec nueva o actualizada.
 
 ### VIII. Alcance de la versión
-Las notificaciones, los flujos de Power Automate y los reportes están fuera del
-alcance de esta versión. Ninguna spec o plan puede incluirlos sin una enmienda
-aprobada a esta constitución.
+Los reportes están fuera del alcance de esta versión. Mediante una
+especificación aprobada, se permite usar flujos de Power Automate únicamente
+para enviar estas notificaciones de deducciones por correo:
+
+1. Cuando un Aprobador UA registre una deducción, notificar al Revisor UD.
+2. Cuando un Revisor UD agregue el número de documento SAP a una deducción,
+   notificar al Asociado Cash App.
+
+Cada correo debe incluir un enlace al registro y un resumen que permita
+identificar el evento y los datos del registro pertinentes. Los flujos deben
+respetar los roles de seguridad, las políticas DLP del ambiente y la solución
+única con prefijo `AIMA`. Deben usar conexiones y conectores corporativos
+aprobados para el ambiente; no se permiten servicios de correo externos ni
+secretos en el repositorio. No se autorizan otros avisos, flujos, reportes ni
+automatizaciones por esta excepción.
 
 ### IX. Cero secretos
 El repositorio MUST NOT contener contraseñas, llaves, tokens ni credenciales.
@@ -99,4 +111,4 @@ el plan, el diseño, el ensayo y los cambios de la aplicación respetan esta
 constitución. Si hay incumplimientos, deben resolverse antes de aprobar el
 cambio.
 
-**Versión**: 1.0.0 | **Ratificada**: 2026-10-29 | **Última enmienda**: 2026-10-29
+**Versión**: 1.1.0 | **Ratificada**: 2026-10-29 | **Última enmienda**: 2026-10-30
