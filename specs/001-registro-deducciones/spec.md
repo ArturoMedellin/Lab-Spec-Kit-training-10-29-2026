@@ -16,6 +16,10 @@
 - Q: ¿Qué debe hacer el sistema si se registra otra deducción con el mismo cliente, origen y número de referencia? → A: Permitirlo y mostrar una advertencia.
 - Q: ¿Debe ser obligatorio capturar el número de cheque, ajuste o transacción Netting antes de guardar? → A: Obligatoria para los tres orígenes.
 
+### Sesión 2026-10-30
+
+- Q: ¿Qué alcance de protección se acepta para Estado y cierre durante el ensayo? → A: El usuario autorizó conceder edición sobre toda la tabla a Revisor UD y bloquear Estado/cierre solo en el formulario. Esta protección no se aplica a nivel de API. Estado de deducción queda de solo lectura en ambos formularios; no se implementan transiciones ni cierre. La limitación debe revisarse en la aceptación humana y no constituye una garantía de bloqueo de esos campos desde la API.
+
 ## Escenarios de usuario y pruebas
 
 ### Historia de usuario 1 - Registrar una deducción (Prioridad: P1)

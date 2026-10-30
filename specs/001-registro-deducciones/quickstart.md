@@ -29,4 +29,22 @@ No se requieren credenciales de SAP/TNET/TradePro, flujos, conexiones externas n
 
 ## Aprobación
 
+## Resultados parciales del ensayo 2026-10-30
+
+Las siguientes comprobaciones se realizaron con una cuenta administrativa y mediante la exportación no administrada de la solución. No demuestran los permisos efectivos de usuarios con los roles base ni completan T019.
+
+| Comprobación | Resultado observado |
+|---|---|
+| Permisos configurados de Deducción | Los tres roles tienen lectura organizacional; solo Aprobador UA tiene creación a nivel User y solo Revisor UD tiene escritura organizacional. |
+| Acceso configurado a la app | La app incluye Asociado Cash App, Aprobador UA y Revisor UD, conservando System Administrator y System Customizer. No se asignaron roles a personas durante esta configuración. |
+| Formularios publicados | Edición UD aparece primero, está limitado a Revisor UD y roles de sistema y no es fallback. Alta de deducción sigue como fallback. |
+| Captura manual SAP | Se guardó un registro sintético sin SAP, después se guardó una referencia SAP en Edición UD y se confirmó su persistencia mediante lectura de Dataverse. |
+| Estado y protección | Estado de deducción permaneció Nueva y está de solo lectura en ambos formularios. SAP es editable en Edición UD y de solo lectura en Alta. El bloqueo de Estado/cierre es solo de formulario, no de API, conforme a la decisión del usuario en la spec. |
+| Navegación | La tabla Deducción está incluida como página de la app; la URL de la lista abre sin el error de sitemap vacío. |
+| Limpieza | El registro sintético fue eliminado y una consulta posterior de su referencia de prueba devolvió cero registros. |
+
+Pendiente: repetir la matriz de aceptación con cuentas separadas de cada rol, sin privilegios administrativos ni permisos acumulativos que invaliden las pruebas; medir el registro en menos de un minuto; comprobar consulta entre usuarios, denegaciones de creación/modificación y exclusión de un registro cerrado preparado por un responsable. La revisión final de cumplimiento/DLP (T020) y la aprobación humana del ensayo (T021) siguen pendientes. No se ha aprobado la liberación.
+
+## Aprobación humana
+
 Una persona responsable debe revisar los resultados, confirmar los permisos y aprobar el diseño antes de continuar a la descomposición de tareas o implementación. Esta guía no sustituye la aprobación de la solución ni amplía la spec.
