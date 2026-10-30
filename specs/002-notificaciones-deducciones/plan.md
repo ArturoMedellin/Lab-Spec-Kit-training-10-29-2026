@@ -62,9 +62,9 @@ volumen de usuarios ni una meta de concurrencia.
 ## Revisión de la constitución
 
 *Puerta previa a investigación y diseño: el usuario aprobó explícitamente la
-especificación el 2026-10-30. Los diez principios cumplen. La aprobación
-humana explícita de este plan y del diseño sigue pendiente; no se avanzará a la
-descomposición de tareas hasta recibirla.*
+especificación el 2026-10-30. Los diez principios cumplen. El usuario aprobó
+explícitamente este plan y los artefactos de diseño el 2026-10-30 antes de
+generar tareas.*
 
 | Principio constitucional | Estado | Justificación |
 |---|---|---|
@@ -153,8 +153,8 @@ humana del diseño sigue pendiente.
 
 ## Puerta de aprobación
 
-**Estado: pendiente de aprobación humana.** Una persona responsable debe
-revisar y aprobar explícitamente este plan y el diseño antes de `/speckit-tasks`.
-También deben confirmarse en el ambiente destino la política DLP, la identidad
+**Estado: plan y diseño aprobados por el usuario el 2026-10-30.** Antes de
+implementar, deben confirmarse en el ambiente destino la política DLP, la identidad
 corporativa de envío, los miembros efectivos de los roles y la app/URL de
-Dataverse. El agente no aprueba su propio trabajo.
+Dataverse. La aprobación humana del ensayo sigue pendiente antes de liberar; el
+agente no aprueba su propio trabajo.
