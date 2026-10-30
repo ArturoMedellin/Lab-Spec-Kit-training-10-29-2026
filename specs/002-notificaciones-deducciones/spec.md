@@ -4,7 +4,7 @@
 
 **Creada**: 2026-10-30
 
-**Estado**: Borrador
+**Estado**: Aprobada para planificación por el usuario el 2026-10-30
 
 **Entrada**: Descripción de usuario: "cuando se cree/registre una nueva deduccion (Por el Aprobador UA), debe de enviar un correo al Revisor UD notificando el nuevo registro. cuando el Revisor UD modifque el registro (agregue el Numero de SAP), se debe notificar al Asociado Cash App. el correo debe te tener la liga del registro y un resumen de los cambios y campos de registro. las notificaciones se deben de enviar por un flujo de power automate."
 
