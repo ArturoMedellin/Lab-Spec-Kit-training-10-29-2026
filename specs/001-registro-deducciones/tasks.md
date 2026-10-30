@@ -21,7 +21,7 @@ description: "Tareas para implementar el registro de deducciones"
 **Propósito**: Crear la tabla central y los permisos base requeridos por todas las historias.
 
 - [x] T004 Crear la tabla principal Deducción en `Solución Power Platform AIMA/Tablas/Deducción` (nombre lógico `aima_table1`)
-- [x] T005 Configurar Asociado Cash App, Aprobador UA y Revisor UD con lectura organizacional y sin privilegios de crear o modificar sobre Deducción en `Solución Power Platform AIMA/Roles de seguridad/Deducción` (verificado en Dataverse: Read = Organization; Create/Write = None; roles personalizados basados en App Opener)
+- [x] T005 Configurar Asociado Cash App, Aprobador UA y Revisor UD con lectura organizacional en `Solución Power Platform AIMA/Roles de seguridad/Deducción` (configuración final verificada en Dataverse: Read = Organization para los tres; Create = User solo para Aprobador UA según T013; Write = Organization solo para Revisor UD según T017; Create y Write = None para los demás casos; roles personalizados basados en App Opener)
 
 **Punto de control**: solución AIMA, aplicación inicial, tabla Deducción y lectura común preparados.
 
@@ -48,8 +48,8 @@ description: "Tareas para implementar el registro de deducciones"
 
 **Prueba independiente**: Con cada rol base, consultar registros creados por distintos usuarios y comprobar que una deducción cerrada no aparece como abierta.
 
-- [ ] T014 [P] [US2] Configurar la vista de todas las deducciones sin filtro por creador en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Vistas/Todas las deducciones`
-- [ ] T015 [P] [US2] Configurar la vista de abiertas para excluir registros cerrados, sin definir transiciones de estado o cierre en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Vistas/Deducciones abiertas`
+- [x] T014 [P] [US2] Crear y publicar la vista «Todas las deducciones» sin filtros por creador, con columnas de cliente, origen, referencia, monto, estado de deducción, tipo de documento y auditoría; ordenar por fecha de creación descendente en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Vistas/Todas las deducciones`
+- [x] T015 [P] [US2] Crear y publicar la vista «Deducciones abiertas» filtrando Estado nativo = Active para excluir registros inactivos/cerrados, sin definir transiciones de estado o cierre; ordenar por fecha de creación descendente en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Vistas/Deducciones abiertas`
 
 **Punto de control**: los tres roles consultan todos los registros y distinguen abiertas de cerradas.
 
@@ -59,11 +59,13 @@ description: "Tareas para implementar el registro de deducciones"
 
 **Prueba independiente**: Revisor UD agrega y consulta el número SAP sin exigirlo antes de contabilizar; confirmar que otros roles no modifican y que no hay conexión ni contabilización externa.
 
-- [ ] T016 [P] [US3] Agregar el campo opcional «Número de documento SAP» a la tabla Deducción; no exigirlo antes de contabilizar en `Solución Power Platform AIMA/Tablas/Deducción/Número de documento SAP`
-- [ ] T017 [P] [US3] Permitir modificación a Revisor UD y denegarla a Asociado Cash App y Aprobador UA, manteniendo Estado y cierre fuera de edición en `Solución Power Platform AIMA/Roles de seguridad/Deducción/Modificar`
-- [ ] T018 [US3] Habilitar a Revisor UD la captura y consulta manual del Número de documento SAP, sin conexión con SAP, TNET o TradePro, en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Formularios/Edición UD`
+- [x] T016 [P] [US3] Agregar el campo opcional «Número de documento SAP» como texto de una línea (máximo 100 caracteres, nombre lógico `aima_numerodedocumentosap`) a la tabla Deducción; no exigirlo antes de contabilizar en `Solución Power Platform AIMA/Tablas/Deducción/Número de documento SAP`
+- [x] T017 [P] [US3] Configurar Write = Organization para Revisor UD y Write = None para Asociado Cash App y Aprobador UA en `Solución Power Platform AIMA/Roles de seguridad/Deducción/Modificar`; Estado de deducción bloqueado en los formularios y cierre no implementado, con protección solo de formulario autorizada para el ensayo (no a nivel de API; pruebas efectivas por rol pendientes en T019)
+- [x] T018 [US3] Publicar «Edición UD» para Revisor UD con Número de documento SAP opcional y editable, primero en el orden de formularios y sin ser fallback; conservar «Alta de deducción» como fallback con SAP de solo lectura y asociar los tres roles base a la app en `Solución Power Platform AIMA/Aplicaciones/Registro de deducciones/Formularios/Edición UD`; captura manual sin conexión con SAP, TNET o TradePro
 
 **Punto de control**: historia P3 implementada sin integración externa.
+
+La exportación de verificación confirma los permisos, las asociaciones de los tres roles con la app y el orden, fallback y controles publicados de ambos formularios. La prueba con cuenta administrativa confirmó el guardado sin SAP y su captura posterior manteniendo estado Nueva; el registro sintético se eliminó y se comprobó su ausencia. Esto no sustituye las pruebas con cuentas separadas de T019.
 
 ## Fase 6: Revisión y entrega
 
